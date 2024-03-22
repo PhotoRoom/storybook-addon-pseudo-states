@@ -40,7 +40,7 @@ const rewriteRule = ({ cssText, selectorText }: CSSStyleRule, shadowRoot?: Shado
 
         let ancestorSelector = ""
         const statesAllClassSelectors = states.map((s) => `.pseudo-${s}-all`).join("")
-        
+
         if (selector.startsWith(":host(")) {
           const matches = selector.match(/^:host\(([^ ]+)\) /)
           if (matches && !matchOne.test(matches[1])) {
@@ -76,9 +76,9 @@ export const rewriteStyleSheet = (
   shadowRoot?: ShadowRoot
 ): boolean => {
   try {
-    const maximumRulesToRewrite = 1000
+    const maximumRulesToRewrite = 10000
     const count = rewriteRuleContainer(sheet, maximumRulesToRewrite, shadowRoot);
-    
+
     if (count >= maximumRulesToRewrite) {
       warnOnce("Reached maximum of 1000 pseudo selectors per sheet, skipping the rest.")
     }
